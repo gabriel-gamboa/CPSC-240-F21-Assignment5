@@ -1,6 +1,6 @@
 ;Program Name        : Clock Speed
 ;Programming Language: x86 Assembly
-;Program Description : This file contains the function clock_speed, which 
+;Program Description : This file contains the function clock_speed, which
 ;                      parses information from cpuid to obtain the base clock speed
 ;                      of the users processor and returns it as a float in xmm0
 ;
@@ -24,7 +24,7 @@ extern atof
 global clock_speed
 
 segment .data
-floatform db "%lf",0
+floatform db "%5.9lf",0
 stringform db "%s",0
 hexform db "0x%016lx",10,0
 quadform db "%8c",0
@@ -72,7 +72,7 @@ register_loop:
 
 char_loop:
 	mov rdx, rbx  ; move string of 4 chars to rdx
-	and rdx, 0xFF ; gets the first char in string 
+	and rdx, 0xFF ; gets the first char in string
 	shr rbx, 0x8  ; shifts string to get next char in next iteration
 
 	cmp rdx, 64   ; 64 is the char value for the @ sign
@@ -110,7 +110,7 @@ loop_conditions:
 exit:
 	push r10
 	xor rax, rax
-	mov rdi, rsp 
+	mov rdi, rsp
 	call atof  ; converts the string representing the clock speed to a float
 	pop r10    ; the value to be returned is already in xmm0, and will be returned
 
@@ -131,4 +131,3 @@ exit:
 	pop rbx
 	pop rbp
 	ret  ; return xmm0
-

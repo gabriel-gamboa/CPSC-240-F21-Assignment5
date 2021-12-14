@@ -1,6 +1,7 @@
 ;****************************************************************************************************************************
-;Program name: "Assignment 4".  This program greets a user by their inputted name  *
-;and title.  Copyright (C) 2021  Gabriel Gamboa                                                                                 *
+;Program name: "Assignment 5".  This program greets calculates how long  *
+;it takes a marble from a give height to fall to the earth.
+;  Copyright (C) 2021  Gabriel Gamboa                                                                                 *
 ;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License  *
 ;version 3 as published by the Free Software Foundation.                                                                    *
 ;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied         *
@@ -20,15 +21,15 @@
 ;  Date program completed 2021-Dec-14
 ;
 ;Purpose
-;  This program takes the value of resistance and current and
-;  returns the power computation if inputs are valid, otherwise
-;  it tells user to try again
+;  This program takes in a given height of a marble from the earth
+;  and calculates how long it takes to reach the earth if dropped.
+;  Value is returned in both tics and nanoseconds.
 ;Project information
-;  Files: maxwell.c, hertz.asm, r.sh
+;  Files: clocks.c, isfloat.cpp, time.asm, clock_speed.asm, r.sh, rg.sh
 ;  Status: The program has been tested extensively with no detectable errors.
 ;
 ;Translator information
-;  Linux: nasm -f elf64 -l hertz.lis -o hertz.o hertz.asm
+;  Linux: nasm -f elf64 -l time.lis -o time.o time.asm
 
 
 ;============================================================================================================================================================
@@ -53,16 +54,16 @@ clock_time db "The current clock time is %ld tics", 10, 0
 farewell_message db "Gabriel wishes you a Nice Day.", 10, 0
 mess db "Invalid input detected.  You may run this program again", 10, 0
 heightprompt db "Please enter the height in meters of the dropped marble: ", 0
-marble_time db "The marble will reach the earth after %5.9lf seconds.", 10, 0
-exec_time db "The execution time was %ld tics which equals %5.9lf ns", 10, 0
-one_float_format db "%lf",0
+marble_time db "The marble will reach the earth after %20.20lf seconds.", 10, 0
+exec_time db "The execution time was %ld tics which equals %20.20lf ns", 10, 0
 stringform db "%s", 0
+
 align 64
 segment .bss  ;Reserved for uninitialized data
 
 programmers_name resb 256                  ;256 byte space created
 height_string resb 256                        ;256 byte space created
-cur_string resb 256                        ;256 byte space created
+
 
 segment .text ;Reserved for executing instructions.
 
