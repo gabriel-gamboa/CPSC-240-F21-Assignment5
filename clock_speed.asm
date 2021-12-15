@@ -24,7 +24,7 @@ extern atof
 global clock_speed
 
 segment .data
-floatform db "%5.9lf",0
+floatform db "%lf",0
 stringform db "%s",0
 hexform db "0x%016lx",10,0
 quadform db "%8c",0
